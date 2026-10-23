@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101116">
+<meta name="description" content="Vaelis — a focused AI chat experience.">
+<title>Vaelis — AI Chat</title>
+<style>
+:root{color-scheme:dark;--bg:#101116;--panel:#171920;--panel2:#1e212a;--panel3:#252935;--text:#f3f4f8;--muted:#9da3b2;--line:#2b2e39;--accent:#a9a5ff;--accent2:#7771ed;--danger:#ff777f;--good:#70d6b1;--radius:18px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);height:100dvh;overflow:hidden}button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.app{height:100dvh;display:flex;background:var(--bg)}.sidebar{width:286px;flex:0 0 286px;background:#14151b;border-right:1px solid var(--line);display:flex;flex-direction:column;padding:18px 13px;gap:14px;z-index:20;transition:transform .22s ease}.brand{display:flex;align-items:center;gap:11px;padding:3px 8px 14px}.brand-mark{width:36px;height:36px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,#b6b0ff,#7169e8);color:#17152b;font-weight:900;font-size:19px;box-shadow:0 5px 20px #7771ed33}.brand-name{font-size:17px;font-weight:750;letter-spacing:-.5px}.brand-sub{font-size:11px;color:var(--muted);margin-top:2px}.new-chat{width:100%;border:1px solid #45445f;background:#222231;color:var(--text);border-radius:13px;padding:12px 13px;display:flex;gap:10px;align-items:center;font-weight:650;text-align:left}.new-chat:hover{background:#2b2a40}.plus{font-size:21px;color:var(--accent);line-height:16px}.section-label{padding:8px 9px 2px;color:#777d8d;text-transform:uppercase;letter-spacing:1.25px;font-size:10px;font-weight:800}.chat-list{overflow:auto;flex:1;display:flex;flex-direction:column;gap:4px;min-height:0}.chat-item{border:1px solid transparent;background:transparent;color:#c6c9d3;text-align:left;padding:10px 11px;border-radius:11px;display:flex;align-items:center;gap:9px;font-size:13px;min-width:0}.chat-item:hover{background:#20222b}.chat-item.active{background:#252635;border-color:#35364b;color:#fff}.chat-item .chat-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}.chat-item .chat-glyph{color:#858a9d;font-size:14px}.sidebar-bottom{border-top:1px solid var(--line);padding:13px 7px 0;display:flex;flex-direction:column;gap:10px}.quota-box{border:1px solid var(--line);border-radius:13px;padding:11px 12px;background:#191a22}.quota-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);gap:8px}.quota-number{font-weight:750;color:var(--text);font-variant-numeric:tabular-nums}.quota-track{height:4px;background:#30313d;border-radius:5px;overflow:hidden;margin-top:9px}.quota-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width .2s}.quota-reset{font-size:10px;color:#777d8d;margin-top:7px}.account-line{display:flex;align-items:center;gap:9px;padding:3px 3px;color:var(--muted);font-size:11px}.account-dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 0 4px #70d6b119}.main{min-width:0;flex:1;display:flex;flex-direction:column;position:relative}.topbar{height:66px;flex:0 0 66px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 25px;gap:14px;background:#101116dd;backdrop-filter:blur(16px);z-index:5}.top-left,.top-actions{display:flex;align-items:center;gap:11px;min-width:0}.icon-btn{width:37px;height:37px;display:grid;place-items:center;border:1px solid transparent;background:transparent;color:#b9bdca;border-radius:11px;font-size:18px}.icon-btn:hover{background:var(--panel2);border-color:var(--line);color:#fff}.mobile-menu{display:none}.conversation-name{font-size:13px;color:#e6e7ee;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:42vw}.status-pill{display:flex;align-items:center;gap:6px;color:#b0b5c5;font-size:11px;border:1px solid var(--line);border-radius:99px;padding:6px 9px;white-space:nowrap}.status-dot{width:6px;height:6px;background:var(--good);border-radius:50%}.messages{flex:1;overflow-y:auto;scroll-behavior:smooth;padding:32px 22px 20px;overscroll-behavior:contain}.messages-inner{max-width:820px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;gap:27px}.welcome{margin:auto;max-width:640px;width:100%;padding:30px 0 55px;text-align:center}.welcome-logo{width:64px;height:64px;border-radius:23px;background:linear-gradient(145deg,#b7b1ff,#6f68e8);display:grid;place-items:center;color:#17152b;font-size:30px;font-weight:900;margin:0 auto 24px;box-shadow:0 12px 40px #7e78f02c}.welcome h1{font-size:clamp(28px,4vw,39px);letter-spacing:-1.6px;margin:0 0 12px;font-weight:750}.welcome p{color:var(--muted);font-size:14px;line-height:1.7;margin:0 auto 27px;max-width:480px}.suggestions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;text-align:left}.suggestion{background:#171920;border:1px solid var(--line);border-radius:15px;padding:14px;color:#d9dbe5;font-size:12px;line-height:1.5;text-align:left;transition:.15s}.suggestion:hover{border-color:#5e5b9b;background:#20202d;transform:translateY(-1px)}.suggestion strong{display:block;color:#fff;font-size:13px;margin-bottom:4px}.message{display:grid;grid-template-columns:34px minmax(0,1fr);gap:13px;align-items:start;animation:appear .18s ease}.avatar{width:32px;height:32px;border-radius:11px;display:grid;place-items:center;font-weight:800;font-size:12px;flex-shrink:0}.message.user .avatar{background:#30323d;color:#e7e8ef}.message.assistant .avatar{background:linear-gradient(145deg,#b7b1ff,#7771ed);color:#17152b}.message-main{min-width:0;padding-top:3px}.message-head{display:flex;align-items:center;gap:9px;margin-bottom:9px}.message-author{font-size:12px;font-weight:750}.message-time{font-size:10px;color:#767c8b}.message-content{font-size:14px;line-height:1.78;color:#e2e4ec;overflow-wrap:anywhere}.message.user .message-content{white-space:pre-wrap;color:#f2f3f8;background:#1b1d25;border:1px solid #292c37;border-radius:4px 15px 15px 15px;padding:12px 15px;display:inline-block;max-width:100%}.message-content p{margin:0 0 12px}.message-content p:last-child{margin-bottom:0}.message-content h1,.message-content h2,.message-content h3{line-height:1.35;letter-spacing:-.4px;margin:19px 0 8px;color:#fff}.message-content h1{font-size:22px}.message-content h2{font-size:19px}.message-content h3{font-size:16px}.message-content ul,.message-content ol{padding-left:24px;margin:8px 0}.message-content li{padding-left:3px;margin:4px 0}.message-content blockquote{margin:10px 0;padding:3px 0 3px 13px;border-left:3px solid #7771ed;color:#bfc2d1}.message-content code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.9em;background:#272a35;border:1px solid #343744;border-radius:5px;padding:2px 5px}.code-wrap{position:relative;margin:12px 0;border:1px solid #30333e;background:#14161d;border-radius:12px;overflow:hidden}.code-head{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid #30333e;color:#999fb0;font-size:10px}.code-head button{border:0;background:transparent;color:#b9bdcb;font-size:11px}.message-content pre{padding:13px 15px;margin:0;overflow:auto;line-height:1.6}.message-content pre code{padding:0;border:0;background:transparent;font-size:12px}.message-content table{border-collapse:collapse;width:100%;display:block;overflow-x:auto;margin:12px 0;font-size:12px}.message-content th,.message-content td{border:1px solid #373a47;padding:8px 10px;text-align:left;min-width:90px}.message-content th{background:#242631;color:#fff}.message-content hr{border:0;border-top:1px solid var(--line);margin:17px 0}.stream-cursor{display:inline-block;width:7px;height:17px;background:var(--accent);border-radius:2px;margin-left:4px;vertical-align:-3px;animation:blink .85s steps(2,start) infinite}.message-actions{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:10px}.action-btn{border:1px solid transparent;background:transparent;color:#8e94a5;border-radius:8px;padding:6px 8px;font-size:11px;display:flex;align-items:center;gap:6px}.action-btn:hover{color:#e5e6ed;background:#20222b;border-color:#30333e}.action-btn:disabled{opacity:.45;cursor:default}.action-btn svg{width:13px;height:13px}.composer-area{padding:8px 22px max(16px,env(safe-area-inset-bottom));background:linear-gradient(0deg,var(--bg) 78%,transparent)}.composer-wrap{max-width:820px;margin:0 auto}.composer{border:1px solid #373a48;border-radius:19px;background:#1a1c24;padding:10px 11px 9px;box-shadow:0 10px 40px #0002;transition:border .15s}.composer:focus-within{border-color:#5d5a91}.composer textarea{width:100%;resize:none;max-height:190px;min-height:45px;border:0;outline:0;background:transparent;color:var(--text);padding:9px 9px 5px;line-height:1.55;font-size:14px}.composer textarea::placeholder{color:#7d8292}.composer-bottom{display:flex;align-items:center;justify-content:space-between;padding:5px 3px 0;gap:8px}.composer-hint{font-size:10px;color:#747a8a;padding-left:7px}.send-tools{display:flex;align-items:center;gap:7px}.send-btn{height:36px;min-width:38px;padding:0 13px;border:0;border-radius:12px;background:var(--accent);color:#17152b;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;gap:7px}.send-btn:hover{background:#c2beff}.send-btn:disabled{opacity:.4;cursor:not-allowed}.stop-btn{height:36px;padding:0 12px;border-radius:12px;background:#392126;border:1px solid #75404a;color:#ffb4ba;font-size:12px;font-weight:700}.disclaimer{text-align:center;color:#666c7b;font-size:10px;margin:10px auto 0;line-height:1.5}.overlay{display:none;position:fixed;inset:0;background:#0009;z-index:15}.toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,15px);background:#272a35;border:1px solid #45495a;color:#f3f4f8;border-radius:12px;padding:10px 15px;font-size:12px;z-index:50;opacity:0;pointer-events:none;transition:.2s;max-width:90vw;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}.error-banner{max-width:820px;margin:0 auto 12px;padding:10px 13px;border:1px solid #713c45;background:#2b1b20;border-radius:11px;color:#ffc0c5;font-size:12px;line-height:1.5}.empty-history{color:#858b9b;font-size:12px;padding:15px 10px;text-align:center}.loading-label{font-size:12px;color:#9da3b2;display:flex;align-items:center;gap:8px}.loader-dots{display:flex;gap:4px}.loader-dots i{width:4px;height:4px;border-radius:50%;background:var(--accent);animation:dot 1s infinite ease-in-out}.loader-dots i:nth-child(2){animation-delay:.15s}.loader-dots i:nth-child(3){animation-delay:.3s}@keyframes blink{to{opacity:0}}@keyframes appear{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}@keyframes dot{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-4px);opacity:1}}
+@media(min-width:1200px){.messages{padding-top:40px}}@media(max-width:760px){.sidebar{position:fixed;inset:0 auto 0 0;width:min(300px,86vw);transform:translateX(-102%);box-shadow:18px 0 50px #0005}.sidebar.open{transform:translateX(0)}.overlay.show{display:block}.mobile-menu{display:grid}.topbar{height:59px;flex-basis:59px;padding:0 12px}.top-actions{gap:3px}.status-pill{font-size:10px;padding:5px 7px}.conversation-name{max-width:35vw}.messages{padding:23px 14px 18px}.messages-inner{gap:23px}.message{grid-template-columns:29px minmax(0,1fr);gap:10px}.avatar{width:28px;height:28px;border-radius:9px}.message-content{font-size:13px;line-height:1.72}.composer-area{padding:7px 12px max(12px,env(safe-area-inset-bottom))}.composer{border-radius:16px}.composer textarea{font-size:13px}.composer-hint{font-size:9px}.welcome{padding:25px 0 40px}.welcome-logo{width:55px;height:55px;border-radius:19px}.suggestions{grid-template-columns:1fr}.suggestion{padding:12px}.disclaimer{font-size:9px}.topbar .desktop-new{display:none}}@media(max-width:390px){.status-pill{display:none}.conversation-name{max-width:47vw}.composer-hint{display:none}.send-btn{padding:0 10px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar" aria-label="Conversation sidebar">
+    <div class="brand"><div class="brand-mark">V</div><div><div class="brand-name">Vaelis</div><div class="brand-sub">A quieter kind of intelligence</div></div></div>
+    <button class="new-chat" id="newChatBtn"><span class="plus">＋</span> New conversation <span style="margin-left:auto;color:#7e8291;font-size:10px">Ctrl K</span></button>
+    <div class="section-label">Your conversations</div>
+    <div class="chat-list" id="chatList"><div class="empty-history">Loading conversations…</div></div>
+    <button class="chat-item" id="sidebarExportBtn" type="button" style="border:1px solid var(--line);justify-content:flex-start"><span class="chat-glyph">⇩</span><span class="chat-title">Export conversation (.txt)</span></button>
+    <div class="sidebar-bottom">
+      <div class="quota-box"><div class="quota-top"><span>Daily messages</span><span class="quota-number" id="quotaNumber">— / 50</span></div><div class="quota-track"><div class="quota-fill" id="quotaFill"></div></div><div class="quota-reset" id="quotaReset">Resets at 12:35 PM IST</div></div>
+      <div class="account-line"><span class="account-dot"></span><span>Anonymous session</span><span style="margin-left:auto">Firebase Auth</span></div>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <header class="topbar"><div class="top-left"><button class="icon-btn mobile-menu" id="menuBtn" aria-label="Open sidebar">☰</button><div class="conversation-name" id="conversationName">New conversation</div></div><div class="top-actions"><div class="status-pill"><span class="status-dot"></span><span id="connectionStatus">Connecting</span></div><button class="icon-btn" id="exportBtn" title="Export conversation as text" aria-label="Export conversation">⇩</button></div></header>
+    <section class="messages" id="messages" aria-live="polite"><div class="messages-inner" id="messagesInner"><div class="welcome" id="welcome"><div class="welcome-logo">V</div><h1>What’s on your mind?</h1><p>A thoughtful space to ask questions, explore ideas, and work through whatever you’re curious about.</p><div class="suggestions"><button class="suggestion" data-prompt="Explain a complex idea in simple terms."><strong>✳ Make something clear</strong>Explain a complex idea in simple terms.</button><button class="suggestion" data-prompt="Help me brainstorm a few creative ideas for a project."><strong>✧ Explore ideas</strong>Brainstorm something from a fresh angle.</button><button class="suggestion" data-prompt="Help me make a practical plan to learn a new skill."><strong>↗ Make a plan</strong>Turn a goal into manageable steps.</button><button class="suggestion" data-prompt="Review this text and help me improve its clarity: "><strong>⌁ Improve a draft</strong>Sharpen writing and communicate clearly.</button></div></div></div></section>
+    <div class="composer-area"><div class="composer-wrap"><div id="errorSlot"></div><div class="composer"><textarea id="messageInput" rows="1" maxlength="10000" placeholder="Message Vaelis…" aria-label="Message Vaelis"></textarea><div class="composer-bottom"><div class="composer-hint">Enter to send · Shift + Enter for a new line</div><div class="send-tools"><button class="stop-btn" id="stopBtn" hidden>■ Stop generating</button><button class="send-btn" id="sendBtn" aria-label="Send message"><span>↑</span><span class="send-label">Send</span></button></div></div></div><div class="disclaimer">Vaelis can make mistakes. Check important information. Your conversations are saved to your account.</div></div></div>
+  </main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script>
+(() => {
+  'use strict';
+  const firebaseConfig = {
+    apiKey: "AIzaSyDsAIXYDJvBwv8qdElLAc9EcFVFYa6AC4",
+    authDomain: "vaelisagi.firebaseapp.com",
+    projectId: "vaelisagi",
+    storageBucket: "vaelisagi.firebasestorage.app",
+    messagingSenderId: "235980356458",
+    appId: "1:235980356458:web:629cb7e373940113ec8313"
+  };
+  const API_BASE = 'https://vaelis-backend.prathameshsingh5.workers.dev';
+  const DAILY_LIMIT = 50;
+  const $ = (id) => document.getElementById(id);
+  const ui = {
+    sidebar:$('sidebar'), overlay:$('overlay'), menuBtn:$('menuBtn'), newChatBtn:$('newChatBtn'), chatList:$('chatList'),
+    conversationName:$('conversationName'), messages:$('messages'), messagesInner:$('messagesInner'), welcome:$('welcome'),
+    input:$('messageInput'), sendBtn:$('sendBtn'), stopBtn:$('stopBtn'), errorSlot:$('errorSlot'), toast:$('toast'),
+    quotaNumber:$('quotaNumber'), quotaFill:$('quotaFill'), quotaReset:$('quotaReset'), status:$('connectionStatus'), exportBtn:$('exportBtn'), sidebarExportBtn:$('sidebarExportBtn')
+  };
+  let authUser = null;
+  let currentConversationId = null;
+  let conversations = [];
+  let currentMessages = [];
+  let isGenerating = false;
+  let activeController = null;
+  let quota = {limit:DAILY_LIMIT,used:0,remaining:DAILY_LIMIT};
+  let toastTimer = null;
+
+  function showToast(message) {
+    ui.toast.textContent = message;
+    ui.toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => ui.toast.classList.remove('show'), 2600);
+  }
+  function showError(message) {
+    ui.errorSlot.replaceChildren();
+    if (!message) return;
+    const div = document.createElement('div'); div.className='error-banner'; div.textContent=message; ui.errorSlot.appendChild(div);
+  }
+  function setStatus(text, ok=true) {
+    ui.status.textContent=text;
+    const dot=ui.status.previousElementSibling;
+    if(dot) dot.style.background=ok?'var(--good)':'var(--danger)';
+  }
+  function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function inlineMarkdown(text) {
+    let s=escapeHtml(text);
+    s=s.replace(/`([^`\n]+)`/g,'<code>$1</code>');
+    s=s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/__(.+?)__/g,'<strong>$1</strong>');
+    s=s.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g,'$1<em>$2</em>').replace(/(^|[^_])_([^_\n]+)_(?!_)/g,'$1<em>$2</em>');
+    s=s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener noreferrer" style="color:#b8b4ff">$1</a>');
+    return s;
+  }
+  function markdownToHtml(raw) {
+    const source=String(raw||'').replace(/\r\n/g,'\n');
+    const blocks=source.split(/```/);
+    let html='';
+    for(let i=0;i<blocks.length;i++) {
+      if(i%2===1) {
+        const firstNl=blocks[i].indexOf('\n');
+        const lang=firstNl>=0?blocks[i].slice(0,firstNl).trim().slice(0,30):'';
+        const code=firstNl>=0?blocks[i].slice(firstNl+1):blocks[i];
+        html+=`<div class="code-wrap"><div class="code-head"><span>${escapeHtml(lang||'Code')}</span><button type="button" data-copy-code>Copy code</button></div><pre><code>${escapeHtml(code.replace(/\n$/,''))}</code></pre></div>`;
+        continue;
+      }
+      const lines=blocks[i].split('\n'); let out=[]; let para=[]; let listType=null; let list=[]; let table=[];
+      const flushPara=()=>{if(para.length){out.push('<p>'+inlineMarkdown(para.join('\n')).replace(/\n/g,'<br>')+'</p>');para=[];}};
+      const flushList=()=>{if(list.length){out.push(`<${listType}>`+list.map(x=>'<li>'+inlineMarkdown(x)+'</li>').join('')+`</${listType}>`);list=[];listType=null;}};
+      const flushTable=()=>{if(table.length){const rows=table.filter(x=>!/^\s*\|?\s*:?-{3,}/.test(x));if(rows.length){const cells=rows.map(r=>r.trim().replace(/^\||\|$/g,'').split('|').map(c=>c.trim()));out.push('<table>'+cells.map((row,idx)=>'<tr>'+row.map(c=>idx===0?'<th>'+inlineMarkdown(c)+'</th>':'<td>'+inlineMarkdown(c)+'</td>').join('')+'</tr>').join('')+'</table>');}table=[];}};
+      for(const line of lines) {
+        if(/^\s*\|.*\|\s*$/.test(line)){flushPara();flushList();table.push(line);continue;} else flushTable();
+        if(/^\s*$/.test(line)){flushPara();flushList();continue;}
+        const heading=line.match(/^\s*(#{1,3})\s+(.+)$/); if(heading){flushPara();flushList();out.push(`<h${heading[1].length}>${inlineMarkdown(heading[2])}</h${heading[1].length}>`);continue;}
+        if(/^\s*([-*_]\s*){3,}$/.test(line)){flushPara();flushList();out.push('<hr>');continue;}
+        const quote=line.match(/^\s*&gt;\s?(.*)$/)||line.match(/^\s*>\s?(.*)$/); if(quote){flushPara();flushList();out.push('<blockquote>'+inlineMarkdown(quote[1])+'</blockquote>');continue;}
+        const bullet=line.match(/^\s*[-*+]\s+(.+)$/); const ordered=line.match(/^\s*\d+[.)]\s+(.+)$/);
+        if(bullet||ordered){flushPara();const type=ordered?'ol':'ul';if(listType&&listType!==type)flushList();listType=type;list.push((bullet||ordered)[1]);continue;}
+        flushList();para.push(line);
+      }
+      flushPara();flushList();flushTable();html+=out.join('');
+    }
+    return html.replace(/\n/g,'');
+  }
+  function scrollBottom(force=true) {
+    if(force || ui.messages.scrollHeight-ui.messages.scrollTop-ui.messages.clientHeight<180) ui.messages.scrollTop=ui.messages.scrollHeight;
+  }
+  function formatTime(value) { try {return new Intl.DateTimeFormat(undefined,{hour:'numeric',minute:'2-digit'}).format(new Date(value||Date.now()));} catch{return '';} }
+  function makeIcon(letter, role) { const div=document.createElement('div');div.className='avatar';div.textContent=letter;div.setAttribute('aria-hidden','true');return div; }
+  function buildMessage(message, opts={}) {
+    const role=message.role==='user'?'user':'assistant';
+    const row=document.createElement('article'); row.className=`message ${role}`;
+    row.dataset.messageId=message.id||'';
+    row.appendChild(makeIcon(role==='user'?'Y':'V',role));
+    const main=document.createElement('div');main.className='message-main';
+    const head=document.createElement('div');head.className='message-head';
+    const author=document.createElement('span');author.className='message-author';author.textContent=role==='user'?'You':'Vaelis';
+    const time=document.createElement('span');time.className='message-time';time.textContent=formatTime(message.createdAt);
+    head.append(author,time);main.appendChild(head);
+    const content=document.createElement('div');content.className='message-content';content.innerHTML=role==='user'?escapeHtml(message.text||'').replace(/\n/g,'<br>'):markdownToHtml(message.text||'');
+    if(opts.streaming){const cursor=document.createElement('span');cursor.className='stream-cursor';cursor.setAttribute('aria-label','Response is streaming');content.appendChild(cursor);row.dataset.streaming='true';}
+    main.appendChild(content);
+    if(role==='assistant'&&!opts.streaming) {
+      const actions=document.createElement('div');actions.className='message-actions';
+      const read=document.createElement('button');read.className='action-btn';read.type='button';read.innerHTML='◖ <span>Read aloud</span>';read.dataset.action='read';
+      const share=document.createElement('button');share.className='action-btn';share.type='button';share.innerHTML='↗ <span>Share response</span>';share.dataset.action='share';
+      const regen=document.createElement('button');regen.className='action-btn';regen.type='button';regen.innerHTML='⟳ <span>Regenerate</span>';regen.dataset.action='regenerate';
+      actions.append(read,share,regen);main.appendChild(actions);
+    }
+    row.appendChild(main);return row;
+  }
+  function renderConversation() {
+    ui.messagesInner.replaceChildren();
+    if(!currentMessages.length){
+      const welcome=document.createElement('div');welcome.className='welcome';welcome.innerHTML='<div class="welcome-logo">V</div><h1>What’s on your mind?</h1><p>A thoughtful space to ask questions, explore ideas, and work through whatever you’re curious about.</p><div class="suggestions"><button class="suggestion" data-prompt="Explain a complex idea in simple terms."><strong>✳ Make something clear</strong>Explain a complex idea in simple terms.</button><button class="suggestion" data-prompt="Help me brainstorm a few creative ideas for a project."><strong>✧ Explore ideas</strong>Brainstorm something from a fresh angle.</button><button class="suggestion" data-prompt="Help me make a practical plan to learn a new skill."><strong>↗ Make a plan</strong>Turn a goal into manageable steps.</button><button class="suggestion" data-prompt="Review this text and help me improve its clarity: "><strong>⌁ Improve a draft</strong>Sharpen writing and communicate clearly.</button></div>';
+      ui.messagesInner.appendChild(welcome);
+    } else currentMessages.forEach(m=>ui.messagesInner.appendChild(buildMessage(m)));
+    updateConversationTitle();renderChatList();scrollBottom(true);
+  }
+  function updateConversationTitle() {
+    const item=conversations.find(c=>c.id===currentConversationId);
+    ui.conversationName.textContent=item?.title||'New conversation';
+  }
+  function renderChatList() {
+    ui.chatList.replaceChildren();
+    if(!conversations.length){const empty=document.createElement('div');empty.className='empty-history';empty.textContent='Your conversations will appear here.';ui.chatList.appendChild(empty);return;}
+    conversations.forEach(c=>{
+      const b=document.createElement('button');b.className='chat-item'+(c.id===currentConversationId?' active':'');b.type='button';b.title=c.title||'New conversation';
+      const glyph=document.createElement('span');glyph.className='chat-glyph';glyph.textContent='▤';
+      const title=document.createElement('span');title.className='chat-title';title.textContent=c.title||'New conversation';b.append(glyph,title);
+      b.addEventListener('click',()=>loadConversation(c.id));ui.chatList.appendChild(b);
+    });
+  }
+  async function api(path, options={}) {
+    if(!authUser) throw new Error('Your anonymous session is still connecting. Please try again.');
+    const token=await authUser.getIdToken();
+    const headers=new Headers(options.headers||{});headers.set('Authorization','Bearer '+token);
+    if(options.body!==undefined) headers.set('Content-Type','application/json');
+    const response=await fetch(API_BASE+path,{...options,headers,body:options.body===undefined?undefined:JSON.stringify(options.body)});
+    if(!response.ok){let data={};try{data=await response.json();}catch{}const err=new Error(data.error||`Request failed (${response.status}).`);err.status=response.status;err.data=data;throw err;}
+    return response;
+  }
+  async function loadQuota() {
+    try{const r=await api('/api/quota');quota=await r.json();quota.limit=Number(quota.limit)||DAILY_LIMIT;quota.used=Number(quota.used)||0;quota.remaining=Math.max(0,Number(quota.remaining??quota.limit-quota.used));
+      ui.quotaNumber.textContent=`${quota.used} / ${quota.limit}`;ui.quotaFill.style.width=`${Math.min(100,quota.used/quota.limit*100)}%`;ui.quotaReset.textContent='Resets at 12:35 PM IST';
+      if(quota.remaining<=0){ui.sendBtn.disabled=true;ui.input.placeholder='Daily limit reached · resets at 12:35 PM IST';}else{ui.sendBtn.disabled=isGenerating;ui.input.placeholder='Message Vaelis…';}
+    }catch(e){console.warn('Quota refresh failed',e);}
+  }
+  async function loadConversations() {
+    const r=await api('/api/conversations');const data=await r.json();conversations=Array.isArray(data.conversations)?data.conversations:[];renderChatList();
+  }
+  async function createConversation() {
+    if(isGenerating) await stopGeneration(false);
+    showError('');
+    try{const r=await api('/api/conversations',{method:'POST',body:{title:'New conversation'}});const data=await r.json();const c=data.conversation;
+      currentConversationId=c.id;currentMessages=[];if(!conversations.some(x=>x.id===c.id))conversations.unshift(c);renderConversation();closeSidebar();ui.input.focus();
+    }catch(e){showError(e.message);showToast('Could not create conversation.');}
+  }
+  async function loadConversation(id) {
+    if(isGenerating) await stopGeneration(false);
+    showError('');
+    try{const r=await api('/api/conversations/'+encodeURIComponent(id));const data=await r.json();const c=data.conversation;
+      currentConversationId=c.id;currentMessages=Array.isArray(c.messages)?c.messages.map(m=>({...m,createdAt:m.createdAt||Date.now()})):[];
+      const existing=conversations.findIndex(x=>x.id===c.id);const summary={id:c.id,title:c.title||'New conversation',updatedAt:c.updatedAt||Date.now()};if(existing>=0)conversations[existing]={...conversations[existing],...summary};else conversations.unshift(summary);
+      conversations.sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));renderConversation();closeSidebar();
+    }catch(e){showError(e.message);}
+  }
+  function closeSidebar(){ui.sidebar.classList.remove('open');ui.overlay.classList.remove('show');}
+  function openSidebar(){ui.sidebar.classList.add('open');ui.overlay.classList.add('show');}
+  function setGenerating(value){isGenerating=value;ui.stopBtn.hidden=!value;ui.sendBtn.disabled=value||quota.remaining<=0;ui.input.disabled=false;ui.newChatBtn.disabled=false;ui.sendBtn.querySelector('.send-label').textContent=value?'Working':'Send';}
+  function appendLiveAssistant() {
+    const row=buildMessage({role:'assistant',text:'',createdAt:Date.now()},{streaming:true});ui.messagesInner.appendChild(row);scrollBottom(true);return row;
+  }
+  function updateLive(row,text) {
+    const content=row.querySelector('.message-content');content.innerHTML=markdownToHtml(text);const cursor=document.createElement('span');cursor.className='stream-cursor';cursor.setAttribute('aria-label','Response is streaming');content.appendChild(cursor);scrollBottom(false);
+  }
+  function finalizeLive(row,text,createdAt=Date.now()) {
+    const final=buildMessage({role:'assistant',text,createdAt});row.replaceWith(final);delete row.dataset.streaming;scrollBottom(true);return final;
+  }
+  async function sendMessage(textOverride=null, regenerate=false) {
+    if(isGenerating)return;
+    const text=(textOverride!==null?textOverride:ui.input.value).trim();
+    if(!regenerate&&!text)return;
+    if(!authUser){showError('Connecting your anonymous account. Please try again in a moment.');return;}
+    if(quota.remaining<=0){showError('You have reached your daily limit of 50 requests. Your quota resets at 12:35 PM IST.');await loadQuota();return;}
+    showError('');
+    if(!currentConversationId){
+      try{const r=await api('/api/conversations',{method:'POST',body:{title:'New conversation'}});const data=await r.json();currentConversationId=data.conversation.id;conversations.unshift(data.conversation);}catch(e){showError(e.message);return;}
+    }
+    if(!regenerate){const userMsg={role:'user',text,createdAt:Date.now()};currentMessages.push(userMsg);ui.messagesInner.querySelector('.welcome')?.remove();ui.messagesInner.appendChild(buildMessage(userMsg));ui.input.value='';resizeInput();scrollBottom(true);}
+    const live=appendLiveAssistant();let answer='';let sawDone=false;activeController=new AbortController();setGenerating(true);
+    try {
+      const endpoint=regenerate?'/api/regenerate':'/api/chat';
+      const response=await api(endpoint,{method:'POST',body:regenerate?{conversationId:currentConversationId,regenerate:true}:{conversationId:currentConversationId,message:text},signal:activeController.signal,headers:{'Accept':'text/event-stream'}});
+      if(!response.body)throw new Error('Streaming is not supported by this connection.');
+      const reader=response.body.getReader();const decoder=new TextDecoder();let buffer='';
+      while(true){const {value,done}=await reader.read();if(done)break;buffer+=decoder.decode(value,{stream:true});let idx;
+        while((idx=buffer.indexOf('\n\n'))!==-1){const frame=buffer.slice(0,idx);buffer=buffer.slice(idx+2);const dataLine=frame.split('\n').find(line=>line.startsWith('data:'));if(!dataLine)continue;let event;try{event=JSON.parse(dataLine.slice(5).trim());}catch{continue;}
+          if(event.type==='start'){if(event.quota){quota={...event.quota};updateQuotaFromEvent(event.quota);}}
+          else if(event.type==='delta'){answer+=event.text||'';updateLive(live,answer);}
+          else if(event.type==='done'){sawDone=true;}
+          else if(event.type==='stopped'){sawDone=true;}
+          else if(event.type==='error'){throw new Error(event.message||'Generation failed.');}
+        }
+      }
+      if(buffer.trim().startsWith('data:')){try{const event=JSON.parse(buffer.trim().slice(5).trim());if(event.type==='delta'){answer+=event.text||'';updateLive(live,answer);}if(event.type==='error')throw new Error(event.message||'Generation failed.');}catch(e){if(e instanceof Error&&e.message!=='Unexpected end of JSON input')throw e;}}
+      if(!answer.trim()){
+        live.remove();
+        if(!sawDone)showError('Vaelis did not return a response. Please try again.');
+      } else {
+        finalizeLive(live,answer);currentMessages.push({role:'assistant',text:answer,createdAt:Date.now()});
+      }
+      await Promise.allSettled([loadQuota(),loadConversations()]);
+      // Reconcile saved state after completion, while keeping the user in the same conversation.
+      if(currentConversationId){const keepId=currentConversationId;try{const r=await api('/api/conversations/'+encodeURIComponent(keepId));const d=await r.json();currentMessages=d.conversation.messages||currentMessages;renderConversation();}catch{}}
+    } catch(e) {
+      if(live.isConnected){if(answer.trim()){finalizeLive(live,answer);currentMessages.push({role:'assistant',text:answer,createdAt:Date.now(),interrupted:true});}else live.remove();}
+      if(e.name==='AbortError'){showToast(answer.trim()?'Generation stopped.':'Generation stopped.');}
+      else if(e.status===429){showError(e.message||'Daily limit reached. Resets at 12:35 PM IST.');await loadQuota();}
+      else {showError(e.message||'Could not reach Vaelis. Check your connection and try again.');setStatus('Connection issue',false);}
+      await Promise.allSettled([loadQuota(),loadConversations()]);
+    } finally {activeController=null;setGenerating(false);if(quota.remaining<=0){ui.sendBtn.disabled=true;ui.input.placeholder='Daily limit reached · resets at 12:35 PM IST';}ui.input.focus();}
+  }
+  function updateQuotaFromEvent(q){if(!q)return;quota={...quota,...q};ui.quotaNumber.textContent=`${quota.used??0} / ${quota.limit??DAILY_LIMIT}`;ui.quotaFill.style.width=`${Math.min(100,(Number(quota.used)||0)/(Number(quota.limit)||DAILY_LIMIT)*100)}%`;}
+  async function stopGeneration(showNotice=true){if(!activeController)return;const controller=activeController;activeController=null;controller.abort();if(showNotice)showToast('Stopping response…');}
+  async function regenerateFrom(row) {
+    const index=[...ui.messagesInner.querySelectorAll('.message.assistant')].indexOf(row);
+    const assistants=[...ui.messagesInner.querySelectorAll('.message.assistant')];
+    if(index<0)return;
+    // Backend regeneration targets the latest user turn; only expose it for the last assistant response.
+    if(row!==assistants[assistants.length-1]){showToast('Regenerate is available for the latest response.');return;}
+    if(isGenerating)return;
+    const last=currentMessages[currentMessages.length-1];
+    if(last?.role==='assistant')currentMessages.pop();
+    row.remove();await sendMessage(null,true);
+  }
+  async function shareResponse(text) {
+    const shareText=`${text}\n\nGenerated by Vaelis`;
+    try{if(navigator.share){await navigator.share({text:shareText});return;}if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(shareText);showToast('Response copied with attribution.');return;}}
+    catch(e){if(e.name==='AbortError')return;}
+    fallbackCopy(shareText);
+  }
+  async function fallbackCopy(text){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');showToast('Copied to clipboard.');}catch{showToast('Could not copy automatically.');}ta.remove();}
+  function readAloud(text,button){if(!('speechSynthesis'in window)){showToast('Read aloud is not supported in this browser.');return;}if(speechSynthesis.speaking){speechSynthesis.cancel();document.querySelectorAll('[data-action="read"]').forEach(b=>b.querySelector('span').textContent='Read aloud');if(button)return;}const utterance=new SpeechSynthesisUtterance(text);utterance.rate=1;utterance.onend=()=>{if(button?.isConnected)button.querySelector('span').textContent='Read aloud';};utterance.onerror=()=>{if(button?.isConnected)button.querySelector('span').textContent='Read aloud';};if(button)button.querySelector('span').textContent='Stop reading';speechSynthesis.speak(utterance);}
+  async function exportConversation(){
+    if(!currentConversationId||!currentMessages.length){showToast('There is no conversation to export yet.');return;}
+    const title=conversations.find(c=>c.id===currentConversationId)?.title||'Vaelis conversation';
+    const lines=[title,'Exported from Vaelis','='.repeat(Math.min(60,title.length+10)),''];
+    for(const m of currentMessages){lines.push(`${m.role==='user'?'You':'Vaelis'} · ${new Date(m.createdAt||Date.now()).toLocaleString()}`,m.text||'','');}
+    lines.push('Generated by Vaelis');const blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`${title.replace(/[^a-z0-9-_ ]/gi,'').trim().replace(/\s+/g,'-').slice(0,60)||'vaelis-conversation'}.txt`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);showToast('Conversation exported as a text file.');
+  }
+  function resizeInput(){ui.input.style.height='auto';ui.input.style.height=Math.min(ui.input.scrollHeight,190)+'px';}
+  ui.sendBtn.addEventListener('click',()=>sendMessage());
+  ui.stopBtn.addEventListener('click',()=>stopGeneration(true));
+  ui.newChatBtn.addEventListener('click',createConversation);
+  ui.menuBtn.addEventListener('click',openSidebar);ui.overlay.addEventListener('click',closeSidebar);
+  ui.exportBtn.addEventListener('click',exportConversation);ui.sidebarExportBtn.addEventListener('click',()=>{exportConversation();closeSidebar();});
+  ui.input.addEventListener('input',resizeInput);
+  ui.input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();sendMessage();}});
+  document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();createConversation();}if(e.key==='Escape')closeSidebar();});
+  ui.messagesInner.addEventListener('click',e=>{
+    const suggestion=e.target.closest('[data-prompt]');if(suggestion){ui.input.value=suggestion.dataset.prompt;resizeInput();ui.input.focus();return;}
+    const copyCode=e.target.closest('[data-copy-code]');if(copyCode){const code=copyCode.closest('.code-wrap')?.querySelector('pre code')?.textContent||'';if(navigator.clipboard?.writeText)navigator.clipboard.writeText(code).then(()=>showToast('Code copied.')).catch(()=>fallbackCopy(code));else fallbackCopy(code);return;}
+    const action=e.target.closest('[data-action]');if(!action)return;const row=action.closest('.message');const text=row?.querySelector('.message-content')?.innerText?.replace(/\s*$/, '')||'';
+    if(action.dataset.action==='read')readAloud(text,action);if(action.dataset.action==='share')shareResponse(text);if(action.dataset.action==='regenerate')regenerateFrom(row);
+  });
+
+  async function boot(){
+    try{
+      firebase.initializeApp(firebaseConfig);
+      const auth=firebase.auth();auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(()=>{});
+      auth.onAuthStateChanged(async user=>{
+        if(!user){try{await auth.signInAnonymously();}catch(e){
+          setStatus('Sign-in failed',false);
+          const code=String(e&&e.code||'auth/unknown');
+          const detail=String(e&&e.message||'No additional details were returned.');
+          let next='';
+          if(code==='auth/operation-not-allowed') next='Anonymous sign-in is disabled for this Firebase project. In Authentication → Sign-in method, enable Anonymous and save.';
+          else if(code==='auth/unauthorized-domain') next='The current website domain is not authorized. In Authentication → Settings → Authorized domains, add the exact hostname shown in your browser address bar, without https://, paths, or trailing slashes.';
+          else if(code==='auth/api-key-not-valid'||code==='auth/invalid-api-key') next='The Firebase Web API key is invalid or restricted. Copy the Web API key from Project settings → General → Your apps, and check its API/referrer restrictions in Google Cloud Console.';
+          else if(code==='auth/network-request-failed') next='The browser could not reach Firebase. Check your internet connection, VPN/ad blocker, and whether https://identitytoolkit.googleapis.com is blocked.';
+          else if(code==='auth/too-many-requests') next='Firebase temporarily blocked repeated sign-in attempts. Wait a little before trying again.';
+          else next='Open the browser developer console for more details, and verify the Firebase Web app configuration belongs to project vaelisagi.';
+          showError('Anonymous sign-in failed. Firebase error: '+code+'. '+detail+' Next step: '+next);
+        }return;}
+        authUser=user;setStatus('Connected',true);
+        try{await loadConversations();await loadQuota();if(conversations.length){await loadConversation(conversations[0].id);}else{currentConversationId=null;currentMessages=[];renderConversation();}}
+        catch(e){setStatus('Backend unavailable',false);showError('Connected to Firebase, but the Vaelis backend could not be reached. Check Cloudflare Worker environment variables, allowed frontend origin, Firebase token verification, and deployment. '+e.message);}
+      });
+    }catch(e){setStatus('Setup error',false);showError('Firebase could not initialize. Check the Firebase configuration and make sure Anonymous sign-in is enabled.');}
+  }
+  boot();
+})();
+</script>
+</body>
+</html>
